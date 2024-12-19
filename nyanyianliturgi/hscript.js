@@ -1,20 +1,20 @@
     // Fungsi untuk menampilkan gambar penuh
     function showFullImage(src) {
-        const overlay = document.createElement(&#39;div&#39;);
-        overlay.classList.add(&#39;image-overlay&#39;);
+        const overlay = document.createElement('div');
+        overlay.classList.add('image-overlay');
         
-        const img = document.createElement(&#39;img&#39;);
+        const img = document.createElement('img');
         img.src = src;
         
         overlay.appendChild(img);
         document.body.appendChild(overlay);
         
         // Tambahkan event listener untuk menutup overlay
-        overlay.addEventListener(&#39;click&#39;, function() {
+        overlay.addEventListener('click', function() {
             document.body.removeChild(overlay);
         });
         
-        overlay.style.display = &#39;flex&#39;;
+        overlay.style.display = 'flex';
     }
   
 /*
