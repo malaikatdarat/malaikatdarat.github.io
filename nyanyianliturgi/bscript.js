@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const table = document.createElement('table');
   table.className = 'infobox';
 
+  let extractedTexts = []; // Array untuk menyimpan teks dari [[...]]
+
   function processLinks(str) {
     let result = str;
 
@@ -68,6 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
         urlPart = urlPart.substring(0, slashIndex);
       }
       urlPart = encodeURIComponent(urlPart).replace(/%20/g, '%20');
+
+      // Tambahkan teks sebelum '/' ke array extractedTexts
+      extractedTexts.push(slashIndex !== -1 ? p1.substring(0, slashIndex) : p1);
+
       return `<a href="/search/label/${urlPart}" target="_blank">${originalText}</a>`;
     });
 
@@ -80,8 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
     result = result.replace(/(.+?)\s*\{(.*?)\}/g, (match, textBefore, p1) => {
         return `<a href="/p/${p1}.html" target="_blank">${textBefore.trim()}</a>`;
     });
-    return result;
-
     return result;
   }
 
@@ -124,7 +128,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Setelah selesai memproses, hapus elemen <pre> agar tidak tampil
   rawElement.remove();
+
+  // Tampilkan hasil di console tanpa spasi setelah koma
+  console.log('Label:', extractedTexts.join(','));
 });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const rawSyairElement = document.getElementById('rawDataSyair');
